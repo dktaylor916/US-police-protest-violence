@@ -37,23 +37,22 @@
       #selectButton {
         position: relative;
         z-index: 99;
-        top:720px;
+        top:1065px;
         font-size: 1em;
         
       }
       #selectButton1 {
         position: relative;
         z-index: 99;
-        top: 1300;
-        left: -185;
+        top: 1620;
+        
         font-size: 1em;
         
       }
       #selectButton2 {
         position: relative;
         z-index: 99;
-        top:1855px;
-        left:-380px;
+        top:2150px;
         font-size: 1em;
         
       }
@@ -77,7 +76,7 @@
         display: inline-block;
         width: 300px;
         height: 400px;
-        top: 1180px;
+        top: 1520px;
         z-index: 99;
         margin-right: 50px;
         opacity: 1;
@@ -176,9 +175,15 @@
   </head>
   <body>
   
+ 
+    <div id="tooltip"></div>
+    <div id="graphic">
+      
+      <div id="sections">
+        
     <div id="circlelegend"></div>
    
-    <div id="tooltip"></div>
+  
    <div id='select'>
     <select name='Select City' id="selectButton">        <option value="start"> 
       ------ Select a City ------
@@ -190,9 +195,6 @@
   ------ Select a City ------
 </option> </select>
 </div>
-    <div id="graphic">
-      
-      <div id="sections">
         <section class="step" id = 'step0'>
           
 
@@ -203,7 +205,7 @@
           <br><br><br><br><br><br><br><br> <br><br><br><br><br><br><br><br>
           <br><br><br><br>
         <h1 style="text-align: center">Total Number of Violations</h1>
-        The 475 violations compiled by Bellingcat were spread out amongst 37 States and 106 different cities. Each instance providing a different insight into the unrest sparked by the killing of Black Americans by police officers. 
+        The 475 violations compiled by Bellingcat were spread out amongst 37 States and 106 different cities. Each instance providing a different insight into the unrest sparked by the killing of Black Americans by police officers. Scroll down to view each individual case. 
         </section>
         <section class="step" id = 'step2'>
 
@@ -213,6 +215,7 @@
           Cases concentrated in Portland, New York, LA
         </h1>
         The graphic shows all 475 cases spread out around their geographical surroundings, color coded by their city to seperate the cases visually. Each case can scrolled over for more details or clicked on to be sent to the source. Use the selection box to isolate cities.<br><br>
+        
         
         <h2 style="text-align: left">Most Cases by City</h2>
         &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Portland,
@@ -236,7 +239,7 @@
           <br><br><br><br><br><br><br><br><br><br><br>
           <br><br><br><br><br><br>
         <h1 style="text-align: center">Calendar: May, June, July Violations</h1>
-       All cases now spread throughout a calendar, showing clusters at the end of May/beginning of June. As well as throughout the weekends.
+       All cases now spread throughout a calendar, showing clusters at the end of May/beginning of June and weekends
 
        <br><br>
        
@@ -1909,7 +1912,7 @@ setTimeout(function () {
       scroll.on("active", function (index) {
         d3.selectAll(".step")
           .transition()
-          .duration(500)
+          .duration(250)
           .style("opacity", function (d, i) {
             return i === index ? 1 : 0.1;
           });
