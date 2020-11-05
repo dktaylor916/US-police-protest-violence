@@ -35,23 +35,25 @@
       }
       
       #selectButton {
-        position: absolute;
+        position: relative;
         z-index: 99;
-        top: 1070;
+        top:720px;
         font-size: 1em;
         
       }
       #selectButton1 {
-        position: absolute;
+        position: relative;
         z-index: 99;
-        top: 1660;
+        top: 1300;
+        left: -185;
         font-size: 1em;
         
       }
       #selectButton2 {
-        position: absolute;
+        position: relative;
         z-index: 99;
-        top: 2200;
+        top:1855px;
+        left:-380px;
         font-size: 1em;
         
       }
@@ -60,19 +62,22 @@
         position: relative;
         display: inline-block;
         width: 300px;
-        top: 60px;
+        top: -300px;
         z-index: 0;
         font-family: 'Times New Roman';
         margin-right: 50px;
         
       }
+.circleNum{
+  z-index: 1;
 
+}
       #circlelegend {
-        position: absolute;
+        position: relative;
         display: inline-block;
         width: 300px;
         height: 400px;
-        top: 1125px;
+        top: 1180px;
         z-index: 99;
         margin-right: 50px;
         opacity: 1;
@@ -101,9 +106,17 @@
         line-height: 32px;
         z-index: 0;
       }
-
+      h6{
+        font-weight: 700;
+        text-align: center;
+        line-height: 45px;
+        z-index: 0;
+      }
       h1 {
         font-size: 35px;
+      }
+      h6 {
+        font-size: 60px;
       }
 
       strong {
@@ -121,7 +134,7 @@
       #vis {
         display: inline-block;
         position: fixed;
-        top: 0px;
+        top: 10px;
         z-index: 1;
         margin-left: 0;
         height: 1000px;
@@ -141,7 +154,7 @@
       }
 
       .sizeLegend2 {
-        opacity: 0.7;
+        opacity: 0.85;
       }
 
       a {
@@ -162,6 +175,7 @@
     </style>
   </head>
   <body>
+  
     <div id="circlelegend"></div>
    
     <div id="tooltip"></div>
@@ -175,16 +189,15 @@
 <select name='Select City' id="selectButton2">        <option value="start"> 
   ------ Select a City ------
 </option> </select>
+</div>
     <div id="graphic">
       
       <div id="sections">
         <section class="step" id = 'step0'>
-          <br><br><br><br><br><br><br><br>
+          
 
-        <h1 style="text-align: center">Police Violence at US Protests</h1>
-
-
-        Over the summer Bellingcat, with the support of the open source community, collected a database of 475 cases of police violence against protesters. The protests sparked by the killing of George Floyd in Minneapolis, have since spread throughout the entire country. This dataset helps paint a full picture of events that we have classified as an unjustified use of force by the police taking place between May 27th and July 12. This interactive data story is meant to help explore different patterns with the types of violations and offer a deeper look into the this summer of police violence.</section>
+        <h6 style="text-align: center">Police Violence at US Protests</h6>
+        <p style="font-size: 18;font-weight: 500;margin-top: -100;">Over the summer Bellingcat, with the support of the open source community, collected a database of 475 cases of police violence against protesters. The protests sparked by the killing of George Floyd in Minneapolis, have since spread throughout the entire country. This dataset helps paint a full picture of events that we have classified as an unjustified use of force by the police taking place between May 27th and July 12. This interactive data story is meant to help explore different patterns with the types of violations and offer a deeper look into the this summer of police violence.</p></section>
         <section class="step" id = 'step1'>
 
           <br><br><br><br><br><br><br><br> <br><br><br><br><br><br><br><br>
@@ -255,7 +268,7 @@
     </section>
     <section class="step" id = 'step5'>
     </section>
-  
+   
       </div>
       <div id="vis"></div>
     </div>
@@ -288,6 +301,10 @@
         .attr("width", w)
         .attr("height", h)
         .attr("opacity", 1);
+
+
+
+
 
       svg
         .append("rect")
@@ -485,7 +502,7 @@
           .attr("fill", "#D6D6D6")
           .attr("stroke", "black");
       });
-      d3.csv("police_final_v10.csv").then(function (data) {
+      d3.csv("police_final_v23.csv").then(function (data) {
         var parseTime = d3.timeParse("%d/%m/%Y");
         data.forEach(function (d) {
           d.date = parseTime(d.date);
@@ -512,7 +529,8 @@
             .attr("r", 15)
             .attr("stroke", "yellow")
             .attr("stroke-width", 4)
-            .attr("opacity", 0);
+            .attr("opacity", 0)
+            ;
         });
         svg
           .selectAll("#dataAnim")
@@ -526,8 +544,8 @@
           d3.select(this)
             .transition("mouseover")
             .duration(0)
-            .attr("stroke-width", 5)
-            .attr("stroke", "yellow");
+            
+            ;
     
           d3
             .select("#tooltip")
@@ -559,8 +577,9 @@
           d3.select(this)
             .transition("mouseout")
             .duration(0)
-            .attr("stroke-width", 1)
-            .attr("stroke", "black");
+            .attr('r',5)
+            .attr('stroke-width',0)
+            ;
         }
 
         function click(d, i) {
@@ -576,7 +595,7 @@
           .attr("class", "title")
           .attr("x", w - 400)
           .attr("y", 60)
-          .attr("font-family", "monospace")
+          .attr("font-family", "Times New Roman")
           .attr("font-size", "2.5em")
           .attr("font-weight", 700)
           .attr("opacity", 0)
@@ -597,7 +616,7 @@
           .attr("cx", 20)
           .attr("cy", 40)
           .attr("r", 10)
-          .attr("stroke", "black")
+          
           .attr('fill',function(d){
           });
 
@@ -609,7 +628,7 @@
           .attr("cy", 85)
 
           .attr("r", 10)
-          .attr("stroke", "black");
+        
 
         circleleg
           .append("circle")
@@ -619,7 +638,7 @@
           .attr("cy", 130)
 
           .attr("r", 10)
-          .attr("stroke", "black");
+          
 
         circleleg
           .append("circle")
@@ -629,7 +648,7 @@
           .attr("cy", 175)
 
           .attr("r", 10)
-          .attr("stroke", "black");
+          
 
         circleleg
           .append("circle")
@@ -639,7 +658,7 @@
           .attr("cy", 220)
 
           .attr("r", 10)
-          .attr("stroke", "black");
+         
 
         window.onload = circleAnim();
 
@@ -679,13 +698,16 @@
                     .duration(500)
                     .attr("opacity", 1)
                     .attr("r", 15)
+                    .attr('fill', '#B81A2F')
                     .attr("stroke", "yellow")
                     .attr("stroke-width", 3)
                     .transition()
                     .duration(500)
-                    .attr("r", 5)
-                    .attr("stroke", "black")
-                    .attr("stroke-width", 1);
+                    .attr('fill','#B81A2F')
+                    .attr('stroke', '#731c27')
+                    .attr('stroke-width',2)
+                    .attr("r", 8)
+                   ;
                   d3.selectAll(".title")
                     .transition()
                     .attr("opacity", 1)
@@ -705,7 +727,7 @@
           }
         }
       });
-     
+    
      ;
 
       function draw1() {
@@ -717,22 +739,43 @@
 
         d3.selectAll("#datacircle")
           .transition()
+          .duration(1000)
+          .attr('stroke','#731C27')
+          .attr('stroke-width',3)
+              .attr("r", function(d){
+                if (d.clst_cnt <= 1){
+                  return 5
+                }
+              if (d.clst_cnt > 1 & d.clst_cnt < 15){
+                return 10}
+            
+              if (d.clst_cnt >= 15 & d.clst_cnt < 30){
+                return 20
+              }
+              if (d.clst_cnt >= 30 & d.clst_cnt < 45){
+                return 25
+              }
+              if (d.clst_cnt >= 45 ){
+                return 35
+              }}
+              )
           .attr("opacity", 1)
-          .attr("r", 5)
-          .attr("stroke-width", 1)
-          .attr("stroke", "black")
+          
+  
+          .attr('fill','#B81A2F')
           .attr("cx", function (d) {
-            return projection([+d.Longitude, +d.Latitude])[0];
+            return projection([+d.clst_geom.split(' ')[0],+d.clst_geom.split(' ')[1]])[0];
           })
           .attr("cy", function (d) {
-            return projection([+d.Longitude, +d.Latitude])[1];
-          });
+            return projection([+d.clst_geom.split(' ')[0], +d.clst_geom.split(' ')[1]])[1];
+          })
+       
 
         d3.selectAll(".title1")
           .transition()
           .attr("x", w - 500)
           .attr("y", 60)
-          .attr("font-family", "monospace")
+          .attr("font-family", "Times New Roman")
           .attr("font-size", "2.5em")
           .attr("opacity", 1)
           .text("May 27 - July 12, 2020");
@@ -741,6 +784,13 @@
       }
 
       function draw2() {
+                  
+        svg
+          .selectAll("#datacircle")
+          .raise()
+          .on("mouseover", function(){console.log('yes')})
+          .on("mouseout", function(){console.log('yes')})
+          .on("click", function(){console.log('yes')});
         d3.selectAll("#dataAnim").remove();
         d3.selectAll(".title").remove();
        
@@ -847,7 +897,7 @@
           .attr("text-anchor", "middle")
           .attr("opacity", 0)
           .attr("font-weight", 700)
-          .attr("font-size", "1.8em")
+          .attr("font-size", "1.4em")
           .text("June")
           .attr('fill', 'black');
           svg
@@ -859,7 +909,7 @@
 .attr("text-anchor", "middle")
 .attr("opacity", 0)
 .attr("font-weight", 700)
-.attr("font-size", "1.8em")
+.attr("font-size", "1.4em")
 .text("May")
 .attr('fill', 'black');
         svg
@@ -871,7 +921,7 @@
           .attr("text-anchor", "middle")
           .attr("opacity", 0)
           .attr("font-weight", 700)
-          .attr("font-size", "1.8em")
+          .attr("font-size", "1.4em")
           .text("July")
           .attr('fill', 'black');
 
@@ -985,43 +1035,150 @@
           .attr("class", "title1")
           .attr("x", w - 400)
           .attr("y", 60)
-          .attr("font-family", "monospace")
+          .attr("font-family", "Times New Roman")
           .attr("font-size", "2.5em")
           .attr("font-weight", 700)
           .attr("opacity", 0)
           .text("HELLO");
-        d3.csv("police_final_v10.csv").then(function (data) {
+
+          svg.selectAll('text')
+          .data(dataset1)
+          .enter()
+          .append('text')
+          .attr('class','circleNum')
+          .attr('x', function (d){
+            return projection([+d.clst_geom.split(' ')[0],+d.clst_geom.split(' ')[1]])[0]
+          })
+          .attr('y', function(d){
+           return (projection([+d.clst_geom.split(' ')[0],+d.clst_geom.split(' ')[1]])[1]) + 5
+          })
+          .attr('opacity',0)
+          .attr('text-anchor','middle')
+          .attr('fill','white')
+          
+          .text(function(d){
+            if (d.clst_cnt != 1){
+            return d.clst_cnt}
+            else{
+              return ''
+            } 
+          })
+       d3.csv("police_final_v23.csv").then(function (data) {
           var parseTime = d3.timeParse("%d/%m/%Y");
           data.forEach(function (d) {
             d.date = parseTime(d.date);
             d.x = +projection([+d.Longitude, +d.Latitude])[0];
             d.y = +projection([+d.Longitude, +d.Latitude])[1];
             dataset = data;
+
+          
+         
             svg
               .selectAll("circle")
               .data(data)
               .enter()
               .append("circle")
+  
               .attr("id", "datacircle")
               .attr("cx", function (d) {
-                return projection([+d.Longitude, +d.Latitude])[0];
-              })
-              .attr("cy", function (d) {
-                return projection([+d.Longitude, +d.Latitude])[1];
-              })
-              .attr("fill", "red")
+            return projection([+d.clst_geom.split(' ')[0],+d.clst_geom.split(' ')[1]])[0];
+          })
+          .attr("cy", function (d) {
+            return projection([+d.clst_geom.split(' ')[0], +d.clst_geom.split(' ')[1]])[1];
+          })
+              .attr("fill", '#B81A2F')
               .attr("r", 15)
               .attr("stroke", "yellow")
               .attr("stroke-width", 4)
               .attr("opacity", 1)
               .transition()
-              .attr("r", 5)
-              .attr("stroke", "black")
-              .attr("stroke-width", 1);
+             
+              .duration(800)
+              
+              .attr('fill', '#B81A2F')
+        .attr('stroke','#731C27')
+        .attr("r", function(d){
+                if (d.clst_cnt <= 1){
+                  return 5
+                }
+              if (d.clst_cnt > 1 & d.clst_cnt < 15){
+                return 10}
+            
+              if (d.clst_cnt >= 15 & d.clst_cnt < 30){
+                return 20
+              }
+              if (d.clst_cnt >= 30 & d.clst_cnt < 45){
+                return 25
+              }
+              if (d.clst_cnt >= 45 ){
+                return 35
+              }}
+              )
               
            
           });
-          svg
+ }
+        );
+
+
+       
+       
+        d3.selectAll(".label").transition().attr("opacity", 0);
+        d3.selectAll(".label").transition().attr("opacity", 0);
+        d3.select("#vis").selectAll(".title1").transition().attr("opacity", 0);
+        d3.select("#vis").selectAll("#main").transition().attr("opacity", 0.5);
+        d3.selectAll('#datacircle')
+        .transition()
+        .duration(1000)
+        .attr('opacity',1)
+        .attr('fill', '#B81A2F')
+        .attr('stroke','#731C27')
+        .attr('stroke-width', 3)
+        .attr("cx", function (d) {
+            return projection([+d.clst_geom.split(' ')[0],+d.clst_geom.split(' ')[1]])[0];
+          })
+          .attr("cy", function (d) {
+            return projection([+d.clst_geom.split(' ')[0], +d.clst_geom.split(' ')[1]])[1];
+          })
+          .attr("r", function(d){
+                if (d.clst_cnt <= 1){
+                  return 5
+                }
+              if (d.clst_cnt > 1 & d.clst_cnt < 15){
+                return 10}
+            
+              if (d.clst_cnt >= 15 & d.clst_cnt < 30){
+                return 20
+              }
+              if (d.clst_cnt >= 30 & d.clst_cnt < 45){
+                return 25
+              }
+              if (d.clst_cnt >= 45 ){
+                return 35
+
+              }}
+              )
+      
+
+        d3.select("#vis")
+          .selectAll(".title1")
+          .transition()
+          .attr("opacity", 1)
+          .attr("font-size", "2em")
+          .attr("x", w - 500)
+          .attr("font-weight", 700)
+          .text("475 Cases, 37 States, 106 Cities");
+
+        d3.selectAll(".label").transition().attr("opacity", 0);
+        setTimeout(function(){d3.selectAll('.circleNum').raise().transition().delay(100).attr('opacity',1)},50)
+      }
+    
+      function draw3(){
+        
+        d3.selectAll('.circleNum').transition().attr('opacity',0)
+        document.getElementById("selectButton1").value = 'start'
+                 
+        svg
           .selectAll("#datacircle")
           .raise()
           .on("mouseover", mouseOver)
@@ -1033,30 +1190,29 @@
           d3.select(this)
             .transition("mouseover")
             .duration(0)
-            .attr("stroke-width", 5)
-            .attr("stroke", "yellow");
-
+            .attr('r',function(){
+              if(activeIndex===4 | activeIndex === 5){
+                return 7
+              }
+            else {return 12}})
+            ;
+    
           d3
             .select("#tooltip")
             .style("left", function(){
              
-             if((d3.event.pageX+10+150)>window.innerWidth)
-             {
-                return d3.event.pageX + 10 + -425+ "px"
-                console.log('big')}
-             else
-              {
-                return d3.event.pageX + 10 + "px"
-                console.log('small')
-          
-              }})
-              .style("top", function(){
-              
-                 return d3.event.pageY + -25 + "px"}
-              )              
-          
-              
-            
+   if((d3.event.pageX+10+50)>window.innerWidth)
+   {
+      return d3.event.pageX + 10 + -500+ "px"
+      console.log('big')}
+   else
+    {
+      return d3.event.pageX + 10 + "px"
+      console.log('small')
+
+    }})
+
+            .style("top", d3.event.pageY - 25 + "px")
             .style("display", "inline-block")
             .html(`<strong>Date:</strong> ${time(d.date)}
                         <br> <strong>City</strong> ${d.City}
@@ -1071,103 +1227,74 @@
           d3.select(this)
             .transition("mouseout")
             .duration(0)
-            .attr("stroke-width", 1)
-            .attr("stroke", "black");
+            .attr('stroke-width',0)
+            .attr('r',function(){
+              if(activeIndex===4 | activeIndex === 5){
+                return 4
+              }
+            else {return 8}})
+            ;
+            
         }
 
         function click(d, i) {
           var win = window.open(d.Hyperlink, "_blank");
           win.focus();
-        }}
-        );
-       
-       
-        d3.selectAll(".label").transition().attr("opacity", 0);
-        d3.selectAll(".label").transition().attr("opacity", 0);
-        d3.select("#vis").selectAll(".title1").transition().attr("opacity", 0);
-        d3.select("#vis").selectAll("#main").transition().attr("opacity", 0.5);
-        d3.selectAll("#datacircle")
-          .transition()
-          .attr("opacity", 1)
-          .attr("r", 5)
-          .attr("stroke", "black")
-          .attr("stroke-width", 1)
-          .attr("cx", function (d) {
-            return projection([+d.Longitude, +d.Latitude])[0];
-          })
-          .attr("cy", function (d) {
-            return projection([+d.Longitude, +d.Latitude])[1];
-          })
-          .attr("fill", "red");
-      
-
-        d3.select("#vis")
-          .selectAll(".title1")
-          .transition()
-          .attr("opacity", 1)
-          .attr("font-size", "2em")
-          .attr("x", w - 500)
-          .attr("font-weight", 700)
-          .text("475 Cases, 37 States, 106 Cities");
-
-        d3.selectAll(".label").transition().attr("opacity", 0);
-
-      }
-    
-      function draw3(){
-        document.getElementById("selectButton1").value = 'start'
+        }
         
     d3.selectAll('.title1').transition().attr('opacity',0)
         hex = [
-      "#FFFF00", "#1CE6FF", "#FF34FF", "#FF4A46", "#008941", "#006FA6", "#A30059",
-        "#FFDBE5", "#7A4900", "#63FFAC", "#B79762", "#004D43", "#8FB0FF", "#997D87",
-        "#5A0007", "#809693", "#FEFFE6", "#1B4400", "#4FC601", "#3B5DFF", "#4A3B53", "#FF2F80",
-        "#61615A", "#BA0900", "#6B7900", "#00C2A0", "#FFAA92", "#FF90C9", "#B903AA", "#D16100",
-        "#DDEFFF", "#7B4F4B", "#A1C299", "#300018", "#0AA6D8", "#013349", "#00846F",
-        "#372101", "#FFB500", "#C2FFED", "#A079BF", "#CC0744", "#C0B9B2", "#C2FF99", "#001E09",
+       "#1CE6FF", "#008941", "#006FA6", "#A30059",
+         "#7A4900", "#B79762", "#004D43", "#8FB0FF", "#997D87",
+        "#5A0007", "#809693", "#1B4400", "#4FC601", "#3B5DFF", "#4A3B53",
+        "#61615A", "#BA0900", "#6B7900", "#00C2A0", "#B903AA", "#D16100",
+       "#7B4F4B", "#A1C299", "#300018", "#0AA6D8", "#013349", "#00846F",
+        "#372101", "#A079BF", "#CC0744", "#C0B9B2","#001E09",
         "#00489C", "#6F0062", "#0CBD66", "#EEC3FF", "#456D75", "#B77B68", "#7A87A1", "#788D66",
-        "#885578", "#FAD09F", "#FF8A9A", "#D157A0", "#BEC459", "#456648", "#0086ED", "#886F4C",
+        "#885578",  "#D157A0", "#BEC459", "#456648", "#0086ED", "#886F4C",
         
-        "#34362D", "#B4A8BD", "#00A6AA", "#452C2C", "#636375", "#A3C8C9", "#FF913F", "#938A81",
+        "#34362D", "#B4A8BD", "#00A6AA", "#452C2C", "#636375", "#A3C8C9", "#938A81",
         "#575329", "#00FECF", "#B05B6F", "#8CD0FF", "#3B9700", "#04F757", "#C8A1A1", "#1E6E00",
         "#7900D7", "#A77500", "#6367A9", "#A05837", "#6B002C", "#772600", "#D790FF", "#9B9700",
-        "#549E79", "#FFF69F", "#201625", "#72418F", "#BC23FF", "#99ADC0", "#3A2465", "#922329",
-        "#5B4534", "#FDE8DC", "#404E55", "#0089A3", "#CB7E98", "#A4E804", "#324E72", "#6A3A4C",
+        "#549E79", "#201625", "#72418F", "#BC23FF", "#99ADC0", "#3A2465", "#922329",
+        "#5B4534",  "#404E55", "#0089A3", "#CB7E98", "#A4E804", "#324E72", "#6A3A4C",
         "#83AB58", "#001C1E", "#D1F7CE", "#004B28", "#C8D0F6", "#A3A489", "#806C66", "#222800",
-        "#BF5650", "#E83000", "#66796D", "#DA007C", "#FF1A59", "#8ADBB4", "#1E0200", "#5B4E51",
-        "#C895C5", "#320033", "#FF6832", "#66E1D3", "#CFCDAC", "#D0AC94", "#7ED379", "#012C58",
+        "#BF5650", "#E83000", "#66796D", "#DA007C", "#8ADBB4", "#1E0200", "#5B4E51",
+        "#C895C5", "#320033", "#66E1D3", "#CFCDAC", "#D0AC94", "#7ED379", "#012C58",
         
         "#7A7BFF", "#D68E01", "#353339", "#78AFA1", "#FEB2C6", "#75797C", "#837393", "#943A4D",
         "#B5F4FF", "#D2DCD5", "#9556BD", "#6A714A", "#001325", "#02525F", "#0AA3F7", "#E98176",
         "#DBD5DD", "#5EBCD1", "#3D4F44", "#7E6405", "#02684E", "#962B75", "#8D8546", "#9695C5",
         "#E773CE", "#D86A78", "#3E89BE", "#CA834E", "#518A87", "#5B113C", "#55813B", "#E704C4",
-         "#A97399", "#4B8160", "#59738A", "#FF5DA7", "#F7C9BF", "#643127", "#513A01",
+         "#A97399", "#4B8160", "#59738A", "#643127", "#513A01",
         "#6B94AA", "#51A058", "#A45B02", "#1D1702", "#E20027", "#E7AB63", "#4C6001", "#9C6966",
         "#64547B", "#97979E", "#006A66", "#391406", "#F4D749", "#0045D2", "#006C31", "#DDB6D0",
-        "#7C6571", "#9FB2A4", "#00D891", "#15A08A", "#BC65E9", "#FFFFFE", "#C6DC99", "#203B3C",
+        "#7C6571", "#9FB2A4", "#00D891", "#15A08A", "#BC65E9", "#C6DC99", "#203B3C",
 
-        "#671190", "#6B3A64", "#F5E1FF", "#FFA0F2", "#CCAA35", "#374527", "#8BB400", "#797868",
+        "#671190", "#6B3A64", "#CCAA35", "#374527", "#8BB400", "#797868",
         "#C6005A", "#3B000A", "#C86240", "#29607C", "#402334", "#7D5A44", "#CCB87C", "#B88183",
         "#AA5199", "#B5D6C3", "#A38469", "#9F94F0", "#A74571", "#B894A6", "#71BB8C", "#00B433",
-        "#789EC9", "#6D80BA", "#953F00", "#5EFF03", "#E4FFFC", "#1BE177", "#BCB1E5", "#76912F",
+        "#789EC9", "#6D80BA", "#953F00", "#1BE177", "#BCB1E5", "#76912F",
         "#003109", "#0060CD", "#D20096", "#895563", "#29201D", "#5B3213", "#A76F42", "#89412E",
-        "#1A3A2A", "#494B5A", "#A88C85", "#F4ABAA", "#A3F3AB", "#00C6C8", "#EA8B66", "#958A9F",
+        "#1A3A2A", "#494B5A", "#A88C85", "#A3F3AB", "#00C6C8", "#EA8B66", "#958A9F",
         "#BDC9D2", "#9FA064", "#BE4700", "#658188", "#83A485", "#453C23", "#47675D", "#3A3F00",
-        "#061203", "#DFFB71", "#868E7E", "#98D058", "#6C8F7D", "#D7BFC2", "#3C3E6E", "#D83D66",
+        "#061203",  "#868E7E", "#98D058", "#6C8F7D", "#D7BFC2", "#3C3E6E", "#D83D66",
         
         "#2F5D9B", "#6C5E46", "#D25B88", "#5B656C", "#00B57F", "#545C46", "#866097", "#365D25",
-        "#252F99", "#00CCFF", "#674E60", "#FC009C", "#92896B"
+        "#252F99", "#00CCFF", "#674E60", "#92896B"
         ];
         color = d3.scaleOrdinal().domain([0, 97]).range(hex);
 
-d3.selectAll("#main").transition().attr("opacity", 0.5);
+d3.selectAll("#main").transition().delay(800).duration(2000).attr("opacity", 0.5);
 
 d3.selectAll("#datacircle")
   .transition()
-  .duration(500)
+  .duration(1500)
   .attr("fill", function (d) {
     return color(d.cluster);
   })
+  .attr('stroke-width',0)
+    .attr('opacity',1)
   .attr("r", 8)
   .attr("cx", function (d) {
     return d.x1;
@@ -1189,11 +1316,15 @@ d3.selectAll("#datacircle")
       }
     })
     .attr('stroke-width',function(d){
-      if (d.City === d3.select('#selectButton').property('value')){return 3}
+      if (d.City === d3.select('#selectButton').property('value')){return 2}
+      if (d3.select('#selectButton').property('value')==='start'){
+        return 0
+      }
       else{
-        return 1
+        return 0
       }
     })
+    .attr('stroke','black')
   
   }
   )
@@ -1254,7 +1385,7 @@ d3.selectAll("#datacircle")
                 })
                 .attr("fill");
             });
-        }, 501);
+        }, 1101);
         
         d3.selectAll('.leg1')
         .on('click', function(){
@@ -1265,6 +1396,11 @@ d3.selectAll("#datacircle")
             {return 1}
             else 
             { return .2}})
+            .attr('stroke', function(d){
+            if (d.City==='Portland, OR')
+            {return 'black'}
+            else 
+            { return 'none'}})
           })
           d3.selectAll('.leg2')
         .on('click', function(){
@@ -1275,6 +1411,11 @@ d3.selectAll("#datacircle")
             {return 1}
             else 
             { return .2}})
+            .attr('stroke', function(d){
+            if (d.City==='New York City, NY')
+            {return 'black'}
+            else 
+            { return 'none'}})
           })
           d3.selectAll('.leg3')
         .on('click', function(){
@@ -1285,6 +1426,11 @@ d3.selectAll("#datacircle")
             {return 1}
             else 
             { return .2}})
+            .attr('stroke', function(d){
+            if (d.City==='Seattle, WA')
+            {return 'black'}
+            else 
+            { return 'none'}})
           })
           d3.selectAll('.leg4')
         .on('click', function(){
@@ -1295,6 +1441,11 @@ d3.selectAll("#datacircle")
             {return 1}
             else 
             { return .2}})
+            .attr('stroke', function(d){
+            if (d.City==='Los Angeles, CA')
+            {return 'black'}
+            else 
+            { return 'none'}})
           })
           d3.selectAll('.leg5')
         .on('click', function(){
@@ -1305,6 +1456,11 @@ d3.selectAll("#datacircle")
             {return 1}
             else 
             { return .2}})
+            .attr('stroke', function(d){
+            if (d.City==='Richmond, VA')
+            {return 'black'}
+            else 
+            { return 'none'}})
           })
 
         d3.selectAll(".label").transition().attr("opacity", 0);
@@ -1333,7 +1489,7 @@ d3.selectAll("#datacircle")
   
         d3.select('#selectButton1')
   
-  .on('change', function(){
+        .on('change', function(){
     d3.selectAll('#datacircle')
     .transition()
     .attr('opacity',function(d){
@@ -1346,16 +1502,14 @@ d3.selectAll("#datacircle")
     })
     .attr('stroke-width',function(d){
       if (d.City === d3.select('#selectButton1').property('value')){return 2}
+      if (d3.select('#selectButton1').property('value')==='start'){
+        return 0
+      }
       else{
-        return 1
+        return 0
       }
     })
-    .attr('r',function(d){
-      if (d.City === d3.select('#selectButton1').property('value')){return 6}
-      else{
-        return 3
-      }
-    })
+    .attr('stroke','black')
   
   }
   )
@@ -1369,18 +1523,18 @@ d3.selectAll("#datacircle")
         d3.selectAll(".calLabel")
           .transition()
           .attr("opacity", 1)
-          .attr("font-family", "monospace")
-          .attr("font-size", "1.2em")
+          .attr("font-family", "Times New Roman")
+          .attr("font-size", "1em")
           .attr('font-weight',700)
           .attr('fill','white')
           .attr("transform", "translate(" + 0 + ", " + -15 + ")")
         d3.selectAll(".calLabel1")
           .transition()
           .attr("opacity", 1)
-          .attr("font-family", "monospace")
+          .attr("font-family", "Times New Roman")
           d3.selectAll("#datacircle")
           .transition()
-          .duration(500)
+          .duration(1800)
           .attr("r", 4)
           .attr("cx", function (d) {
             return d.x2;
@@ -1398,7 +1552,7 @@ d3.selectAll("#datacircle")
   d3.select('.calrect2').transition().attr('opacity',0)
         d3.select('#selectButton2')
   
-  .on('change', function(){
+        .on('change', function(){
     d3.selectAll('#datacircle')
     .transition()
     .attr('opacity',function(d){
@@ -1411,10 +1565,16 @@ d3.selectAll("#datacircle")
     })
     .attr('stroke-width',function(d){
       if (d.City === d3.select('#selectButton2').property('value')){return 2}
+      if (d3.select('#selectButton2').property('value')==='start'){
+        return 0
+      }
       else{
-        return 1
+        return 0
       }
     })
+    .attr('stroke','black')
+  
+  
 
 
     d3.selectAll('#l1')
@@ -1591,7 +1751,7 @@ setTimeout(function () {
 
         d3.selectAll("#datacircle")
           .transition()
-          .duration(700)
+          .duration(1500)
           .attr("cx", function (d) {
             if (d['Type of Violation'] != 'Other' | d['Type of Violation'] != 'Arrest/Detention')
             {return d.x3;}
@@ -1611,7 +1771,7 @@ setTimeout(function () {
           .attr("class", "label")
           .attr("x", 110)
           .attr("y", 320)
-          .attr("font-family", "monospace")
+          .attr("font-family", "Times New Roman")
           .attr("font-size", "1.3em")
           .attr("opacity", 0)
           .attr("text-anchor", "middle")
@@ -1624,7 +1784,7 @@ setTimeout(function () {
           .attr("class", "label")
           .attr("x", 400)
           .attr("y", 320)
-          .attr("font-family", "monospace")
+          .attr("font-family", "Times New Roman")
           .attr("font-size", "1.3em")
           .attr("opacity", 0)
           .attr("text-anchor", "middle")
@@ -1636,7 +1796,7 @@ setTimeout(function () {
           .attr("class", "label")
           .attr("x", 700)
           .attr("y", 320)
-          .attr("font-family", "monospace")
+          .attr("font-family", "Times New Roman")
           .attr("font-size", "1.3em")
           .attr("opacity", 0)
           .attr("text-anchor", "middle")
@@ -1649,7 +1809,7 @@ setTimeout(function () {
           .attr("class", "label")
           .attr("x", 1000)
           .attr("y", 320)
-          .attr("font-family", "monospace")
+          .attr("font-family", "Times New Roman")
           .attr("font-size", "1.3em")
           .attr("opacity", 0)
           .attr("text-anchor", "middle")
@@ -1662,7 +1822,7 @@ setTimeout(function () {
           .attr("class", "label")
           .attr("x", 100)
           .attr("y", 600)
-          .attr("font-family", "monospace")
+          .attr("font-family", "Times New Roman")
           .attr("font-size", "1.3em")
           .attr("opacity", 0)
           .attr("text-anchor", "middle")
@@ -1675,7 +1835,7 @@ setTimeout(function () {
           .attr("class", "label")
           .attr("x", 400)
           .attr("y", 600)
-          .attr("font-family", "monospace")
+          .attr("font-family", "Times New Roman")
           .attr("font-size", "1.3em")
           .attr("opacity", 0)
           .attr("text-anchor", "middle")
@@ -1687,7 +1847,7 @@ setTimeout(function () {
           .attr("class", "label")
           .attr("x", 700)
           .attr("y", 600)
-          .attr("font-family", "monospace")
+          .attr("font-family", "Times New Roman")
           .attr("font-size", "1.3em")
           .attr("opacity", 0)
           .attr("text-anchor", "middle")
@@ -1700,7 +1860,7 @@ setTimeout(function () {
           .attr("class", "label")
           .attr("x", 1000)
           .attr("y", 600)
-          .attr("font-family", "monospace")
+          .attr("font-family", "Times New Roman")
           .attr("font-size", "1.3em")
           .attr("opacity", 0)
           .attr("text-anchor", "middle")
@@ -1730,7 +1890,7 @@ setTimeout(function () {
         yespass,
         draw4,
         yespass1,
-        yespass2,
+        
         draw5
         
         
