@@ -133,7 +133,7 @@
       #vis {
         display: inline-block;
         position: fixed;
-        top: 10px;
+        top: 20px;
         z-index: 1;
         margin-left: 0;
         height: 1000px;
@@ -725,7 +725,7 @@
                 }
               },
 
-              50 * yes
+              30 * yes
             );
           }
         }
@@ -1292,7 +1292,7 @@ d3.selectAll("#main").transition().delay(800).duration(2000).attr("opacity", 0.5
 
 d3.selectAll("#datacircle")
   .transition()
-  .duration(1500)
+  .duration(1200)
   .attr("fill", function (d) {
     return color(d.cluster);
   })
@@ -1778,7 +1778,7 @@ setTimeout(function () {
           .attr("font-size", "1.3em")
           .attr("opacity", 0)
           .attr("text-anchor", "middle")
-          .attr("font-weight", 700)
+         
           .text("Physical Assault:113");
 
         svg
@@ -1791,7 +1791,7 @@ setTimeout(function () {
           .attr("font-size", "1.3em")
           .attr("opacity", 0)
           .attr("text-anchor", "middle")
-          .attr("font-weight", 700)
+         
           .text("Less Lethal Round: 105");
         svg
           .append("text")
@@ -1803,7 +1803,7 @@ setTimeout(function () {
           .attr("font-size", "1.3em")
           .attr("opacity", 0)
           .attr("text-anchor", "middle")
-          .attr("font-weight", 700)
+      
           .text("Tear Gas: 72");
 
         svg
@@ -1816,7 +1816,7 @@ setTimeout(function () {
           .attr("font-size", "1.3em")
           .attr("opacity", 0)
           .attr("text-anchor", "middle")
-          .attr("font-weight", 700)
+          
           .text("Arrest/Detention: 67");
 
         svg
@@ -1829,7 +1829,7 @@ setTimeout(function () {
           .attr("font-size", "1.3em")
           .attr("opacity", 0)
           .attr("text-anchor", "middle")
-          .attr("font-weight", 700)
+          
           .text("Pepper Spray: 59");
 
         svg
@@ -1842,7 +1842,7 @@ setTimeout(function () {
           .attr("font-size", "1.3em")
           .attr("opacity", 0)
           .attr("text-anchor", "middle")
-          .attr("font-weight", 700)
+        
           .text("Intimidation: 39");
         svg
           .append("text")
@@ -1854,7 +1854,7 @@ setTimeout(function () {
           .attr("font-size", "1.3em")
           .attr("opacity", 0)
           .attr("text-anchor", "middle")
-          .attr("font-weight", 700)
+         
           .text("Killing: 1");
 
         svg
@@ -1867,7 +1867,7 @@ setTimeout(function () {
           .attr("font-size", "1.3em")
           .attr("opacity", 0)
           .attr("text-anchor", "middle")
-          .attr("font-weight", 700)
+         
           .text("Other: 19");
 
         d3.selectAll("#datacircle").attr("opacity", 1);
